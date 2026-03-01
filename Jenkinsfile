@@ -5,10 +5,6 @@ pipeline {
         DOCKER_IMAGE = "adityadave29/calculator"
     }
 
-    triggers {
-        pollSCM('* * * * *')
-    }
-
     stages {
 
         stage('Run Unit Tests') {
@@ -24,18 +20,18 @@ pipeline {
             }
         }
 
-       stage('Push To Docker Hub') {
-    steps {
-        withCredentials([usernamePassword(
-            credentialsId: 'dockerhub-creds',
-            usernameVariable: 'DOCKER_USER',
-            passwordVariable: 'DOCKER_PASS'
-        )]) {
-            sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
-            sh 'docker push $DOCKER_IMAGE:latest'
+        stage('Push To Docker Hub') {
+            steps {
+                withCredentials([usernamePassword(
+                    credentialsId: 'dockerhub-creds',
+                    usernameVariable: 'DOCKER_USER',
+                    passwordVariable: 'DOCKER_PASS'
+                )]) {
+                    sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
+                    sh 'docker push $DOCKER_IMAGE:latest'
+                }
+            }
         }
-    }
-}
     }
 
     post {
