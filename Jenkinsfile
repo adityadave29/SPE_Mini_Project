@@ -6,17 +6,10 @@ pipeline {
     }
 
     triggers {
-        pollSCM('* * * * *')  
+        pollSCM('* * * * *')
     }
 
     stages {
-
-        stage('Checkout Code') {
-            steps {
-                git branch: 'master',
-                    url: 'https://github.com/adityadave29/SPE_Mini_Project.git'
-            }
-        }
 
         stage('Run Unit Tests') {
             steps {
@@ -31,18 +24,18 @@ pipeline {
             }
         }
 
-        stage('Push To Docker Hub') {
-            steps {
-                withCredentials([usernamePassword(
-                    credentialsId: 'dockerhub-creds',
-                    usernameVariable: 'adityadave29',
-                    passwordVariable: 'Dave@aditya29'
-                )]) {
-                    sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
-                    sh 'docker push $DOCKER_IMAGE:latest'
-                }
-            }
+       stage('Push To Docker Hub') {
+    steps {
+        withCredentials([usernamePassword(
+            credentialsId: 'dockerhub-creds',
+            usernameVariable: 'DOCKER_USER',
+            passwordVariable: 'DOCKER_PASS'
+        )]) {
+            sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
+            sh 'docker push $DOCKER_IMAGE:latest'
         }
+    }
+}
     }
 
     post {
