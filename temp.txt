@@ -1,0 +1,239 @@
+package main
+
+import (
+	"fmt"
+	"math"
+)
+
+func validateRangeFloat(number float64) error {
+	if number < 0 || number > 9 {
+		return fmt.Errorf("enter valid number in range (0-9)")
+	}
+	return nil
+}
+
+func validateRangeInt(number int) error {
+	if number < 0 || number > 9 {
+		return fmt.Errorf("enter valid number in range (0-9)")
+	}
+	return nil
+}
+
+func add(a, b float64) float64 {
+	return a + b
+}
+
+func subtract(a, b float64) float64 {
+	return a - b
+}
+
+func multiply(a, b float64) float64 {
+	return a * b
+}
+
+func divide(a, b float64) (float64, error) {
+	if math.Abs(b) < 1e-9 {
+		return 0, fmt.Errorf("number is not divisible by 0")
+	}
+	return a / b, nil
+}
+
+func squareRoot(n float64) (float64, error) {
+	if n < 0 {
+		return 0, fmt.Errorf("can't take square root of negative")
+	}
+	return math.Sqrt(n), nil
+}
+
+func fact(n int) (int, error) {
+	if n < 0 {
+		return 0, fmt.Errorf("factorial of negative number is not defined")
+	}
+	if n > 20 {
+		return 0, fmt.Errorf("number too large, may cause overflow")
+	}
+
+	result := 1
+	for i := 1; i <= n; i++ {
+		result *= i
+	}
+	return result, nil
+}
+
+func naturalLog(n float64) (float64, error) {
+	if n <= 0 {
+		return 0, fmt.Errorf("natural log undefined for zero or negative numbers")
+	}
+	return math.Log(n), nil
+}
+
+func pow(a, b float64) float64 {
+	return math.Pow(a, b)
+}
+
+func main() {
+	for {
+		var choice int
+
+		fmt.Println("\n\nScientific Calculator (SPE Mini Project - MT2025013)")
+		fmt.Println("1. Add           2. Subtract     3. Multiply")
+		fmt.Println("4. Divide        5. Square Root  6. Factorial")
+		fmt.Println("7. Natural log   8. Power        9. Exit")
+		fmt.Print("Enter the choice: ")
+
+		_, err := fmt.Scan(&choice)
+		if err != nil {
+			fmt.Println("Invalid input. Please enter a number.")
+			var discard string
+			fmt.Scanln(&discard)
+			continue
+		}
+
+		switch choice {
+
+		case 1, 2, 3, 4, 8:
+			var number1, number2 float64
+
+			fmt.Print("Enter first number: ")
+			_, err = fmt.Scan(&number1)
+			if err != nil {
+				fmt.Println("Invalid number.")
+				var discard string
+				fmt.Scanln(&discard)
+				continue
+			}
+
+			if err := validateRangeFloat(number1); err != nil {
+				fmt.Println("Error:", err)
+				continue
+			}
+
+			fmt.Print("Enter second number: ")
+			_, err = fmt.Scan(&number2)
+			if err != nil {
+				fmt.Println("Invalid number.")
+				var discard string
+				fmt.Scanln(&discard)
+				continue
+			}
+
+			if err := validateRangeFloat(number2); err != nil {
+				fmt.Println("Error:", err)
+				continue
+			}
+
+			switch choice {
+
+			case 1:
+				result := add(number1, number2)
+				fmt.Printf("Summation of %.2f and %.2f is %.2f\n", number1, number2, result)
+
+			case 2:
+				result := subtract(number1, number2)
+				fmt.Printf("Subtraction of %.2f and %.2f is %.2f\n", number1, number2, result)
+
+			case 3:
+				result := multiply(number1, number2)
+				fmt.Printf("Multiplication of %.2f and %.2f is %.2f\n", number1, number2, result)
+
+			case 4:
+				var result float64
+				result, err = divide(number1, number2)
+				if err != nil {
+					fmt.Println("Error:", err)
+					continue
+				}
+				fmt.Printf("Division of %.2f by %.2f is %.2f\n", number1, number2, result)
+
+			case 8:
+				result := pow(number1, number2)
+				fmt.Printf("Power of %.2f raised to %.2f is %.2f\n", number1, number2, result)
+			}
+
+		case 5:
+			var number float64
+
+			fmt.Print("Enter a number: ")
+			_, err = fmt.Scan(&number)
+			if err != nil {
+				fmt.Println("Invalid number.")
+				var discard string
+				fmt.Scanln(&discard)
+				continue
+			}
+
+			if err := validateRangeFloat(number); err != nil {
+				fmt.Println("Error:", err)
+				continue
+			}
+
+			var result float64
+			result, err = squareRoot(number)
+			if err != nil {
+				fmt.Println("Error:", err)
+				continue
+			}
+
+			fmt.Printf("Square root of %.2f is %.2f\n", number, result)
+
+		case 6:
+			var factNumber int
+
+			fmt.Print("Enter a number: ")
+			_, err = fmt.Scan(&factNumber)
+			if err != nil {
+				fmt.Println("Invalid number.")
+				var discard string
+				fmt.Scanln(&discard)
+				continue
+			}
+
+			if err := validateRangeInt(factNumber); err != nil {
+				fmt.Println("Error:", err)
+				continue
+			}
+
+			var result int
+			result, err = fact(factNumber)
+			if err != nil {
+				fmt.Println("Error:", err)
+				continue
+			}
+
+			fmt.Printf("Factorial of %d is %d\n", factNumber, result)
+
+		case 7:
+			var number float64
+
+			fmt.Print("Enter a number: ")
+			_, err = fmt.Scan(&number)
+			if err != nil {
+				fmt.Println("Invalid number.")
+				var discard string
+				fmt.Scanln(&discard)
+				continue
+			}
+
+			if err := validateRangeFloat(number); err != nil {
+				fmt.Println("Error:", err)
+				continue
+			}
+
+			var result float64
+			result, err = naturalLog(number)
+			if err != nil {
+				fmt.Println("Error:", err)
+				continue
+			}
+
+			fmt.Printf("Natural logarithm of %.2f is %.4f\n", number, result)
+
+		case 9:
+			fmt.Println("Exiting Calculator...")
+			return
+
+		default:
+			fmt.Println("Invalid choice")
+		}
+	}
+}
