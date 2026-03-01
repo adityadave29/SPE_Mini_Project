@@ -3,9 +3,16 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = "adityadave29/calculator"
+        DOCKER_CONFIG = "${WORKSPACE}/.docker"
     }
 
     stages {
+
+        stage('Prepare Docker Config') {
+            steps {
+                sh 'mkdir -p $DOCKER_CONFIG'
+            }
+        }
 
         stage('Run Unit Tests') {
             steps {
@@ -21,7 +28,7 @@ pipeline {
                     usernameVariable: 'DOCKER_USER',
                     passwordVariable: 'DOCKER_PASS'
                 )]) {
-                    sh '/usr/local/bin/docker login -u $DOCKER_USER -p $DOCKER_PASS'
+                    sh 'echo $DOCKER_PASS | /usr/local/bin/docker login -u $DOCKER_USER --password-stdin'
                 }
             }
         }
