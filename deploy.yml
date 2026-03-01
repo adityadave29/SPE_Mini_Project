@@ -3,7 +3,6 @@
   become: false
 
   tasks:
-
     - name: Stop old container
       shell: /usr/local/bin/docker stop calculator-container || true
 
@@ -12,6 +11,3 @@
 
     - name: Pull latest image
       shell: /usr/local/bin/docker pull adityadave29/calculator:latest
-
-    - name: Run new container
-      shell: /usr/local/bin/docker run -d --name calculator-container adityadave29/calculator:latest
