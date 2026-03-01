@@ -3,12 +3,14 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = "adityadave29/calculator"
+        PATH = "/opt/homebrew/bin/go"
     }
 
     stages {
 
         stage('Run Unit Tests') {
             steps {
+                sh 'go version'
                 sh 'go mod tidy'
                 sh 'go test -v ./...'
             }
