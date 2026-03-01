@@ -3,18 +3,17 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = "adityadave29/calculator"
-        PATH = "/opt/homebrew/bin/go"
     }
 
     stages {
 
         stage('Run Unit Tests') {
-            steps {
-                sh 'go version'
-                sh 'go mod tidy'
-                sh 'go test -v ./...'
-            }
+        steps {
+            sh '/opt/homebrew/bin/go version'
+            sh '/opt/homebrew/bin/go mod tidy'
+            sh '/opt/homebrew/bin/go test -v ./...'
         }
+    }
 
         stage('Build Docker Image') {
             steps {
