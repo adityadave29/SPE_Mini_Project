@@ -44,15 +44,24 @@ pipeline {
                 '''
             }
         }
+
         stage('Build Docker Image') {
             steps {
-                sh '/opt/homebrew/bin/docker build -t adityadave29/calculator:latest .'
+                sh '''
+                export PATH=$PATH:/opt/homebrew/bin
+                export DOCKER_HOST=unix:///Users/adityadave/.colima/default/docker.sock
+                docker build -t adityadave29/calculator:latest .
+                '''
             }
         }
 
         stage('Push To Docker Hub') {
             steps {
-                sh '/opt/homebrew/bin/docker push $DOCKER_IMAGE:latest'
+                sh '''
+                export PATH=$PATH:/opt/homebrew/bin
+                export DOCKER_HOST=unix:///Users/adityadave/.colima/default/docker.sock
+                docker push adityadave29/calculator:latest
+                '''
             }
         }
 
