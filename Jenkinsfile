@@ -93,7 +93,7 @@ pipeline {
 
         failure {
             emailext(
-                subject: " Jenkins Build FAILED: ${JOB_NAME} #${BUILD_NUMBER}",
+                subject: "Jenkins Build FAILED: ${JOB_NAME} #${BUILD_NUMBER}",
                 body: """
                 Build Failed!
 
@@ -103,7 +103,8 @@ pipeline {
 
                 Please check Jenkins logs.
                 """,
-                to: "daveaditya2004@gmail.com"
+                to: "daveaditya2004@gmail.com",
+                from: "daveaditya2004@gmail.com"
             )
         }
 
