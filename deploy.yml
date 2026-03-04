@@ -3,11 +3,15 @@
   become: false
 
   tasks:
+
     - name: Stop old container
-      shell: /opt/homebrew/bin/docker stop calculator-container || true
+      shell: /opt/homebrew/bin/docker stop calculator || true
 
     - name: Remove old container
-      shell: /opt/homebrew/bin/docker rm calculator-container || true
+      shell: /opt/homebrew/bin/docker rm calculator || true
 
     - name: Pull latest image
       shell: /opt/homebrew/bin/docker pull adityadave29/calculator:latest
+
+    - name: Create new container from latest image (do not run)
+      shell: /opt/homebrew/bin/docker create --name calculator adityadave29/calculator:latest
