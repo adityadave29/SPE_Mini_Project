@@ -4,10 +4,10 @@
 
   tasks:
     - name: Stop old container
-      shell: /usr/local/bin/docker stop calculator-container || true
+      shell: /opt/homebrew/bin/docker stop calculator-container || true
 
     - name: Remove old container
-      shell: /usr/local/bin/docker rm calculator-container || true
+      shell: /opt/homebrew/bin/docker rm calculator-container || true
 
     - name: Pull latest image
-      shell: /usr/local/bin/docker pull adityadave29/calculator:latest
+      shell: /opt/homebrew/bin/docker pull adityadave29/calculator:latest
