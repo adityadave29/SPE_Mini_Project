@@ -36,6 +36,14 @@ pipeline {
             }
         }
 
+        stage('Start Docker Environment') {
+            steps {
+                sh '''
+                export PATH=$PATH:/opt/homebrew/bin
+                colima start || true
+                '''
+            }
+        }
         stage('Build Docker Image') {
             steps {
                 sh '/opt/homebrew/bin/docker build -t adityadave29/calculator:latest .'
