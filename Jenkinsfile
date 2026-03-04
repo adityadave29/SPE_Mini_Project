@@ -71,16 +71,16 @@ pipeline {
             }
         }
 
-         stage('Email Test') {
-            steps {
-                emailext(
-                    subject: "Jenkins Pipeline Email Test",
-                    body: "This is a pipeline email test",
-                    to: "daveaditya2004@gmail.com",
-                    from: "daveaditya2004@gmail.com"
-                )
-            }
-        }
+        //  stage('Email Test') {
+        //     steps {
+        //         emailext(
+        //             subject: "Jenkins Pipeline Email Test",
+        //             body: "This is a pipeline email test",
+        //             to: "daveaditya2004@gmail.com",
+        //             from: "daveaditya2004@gmail.com"
+        //         )
+        //     }
+        // }
     }
     // comment
    
