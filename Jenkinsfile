@@ -29,6 +29,7 @@ pipeline {
                     passwordVariable: 'DOCKER_PASS'
                 )]) {
                     sh '''
+                    export PATH=$PATH:/opt/homebrew/bin
                     echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
                     '''
                 }
