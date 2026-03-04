@@ -76,7 +76,7 @@ pipeline {
 
         success {
             emailext(
-                subject: " Jenkins Build SUCCESS: ${JOB_NAME} #${BUILD_NUMBER}",
+                subject: "Jenkins Build SUCCESS: ${JOB_NAME} #${BUILD_NUMBER}",
                 body: """
                 Build Successful!
 
@@ -86,7 +86,8 @@ pipeline {
 
                 Docker Image: ${DOCKER_IMAGE}:${BUILD_NUMBER}
                 """,
-                to: "daveaditya2004@gmail.com"
+                to: "daveaditya2004@gmail.com",
+                from: "daveaditya2004@gmail.com"
             )
         }
 
