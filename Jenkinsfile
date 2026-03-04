@@ -67,7 +67,11 @@ pipeline {
 
         stage('Deploy with Ansible') {
             steps {
-                sh '/opt/homebrew/bin/ansible-playbook -i inventory.ini deploy.yml'
+                sh '''
+                export PATH=$PATH:/opt/homebrew/bin
+                export DOCKER_HOST=unix:///Users/adityadave/.colima/default/docker.sock
+                ansible-playbook -i inventory.ini deploy.yml
+                '''
             }
         }
     }
