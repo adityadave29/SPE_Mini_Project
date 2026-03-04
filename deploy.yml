@@ -12,6 +12,3 @@
 
     - name: Pull latest image
       shell: /opt/homebrew/bin/docker pull adityadave29/calculator:latest
-
-    - name: Create new container from latest image (do not run)
-      shell: /opt/homebrew/bin/docker create --name calculator adityadave29/calculator:latest
