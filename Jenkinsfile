@@ -38,13 +38,13 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh '/usr/local/bin/docker build -t $DOCKER_IMAGE:latest .'
+                sh '/opt/homebrew/bin/docker build -t adityadave29/calculator:latest .'
             }
         }
 
         stage('Push To Docker Hub') {
             steps {
-                sh '/usr/local/bin/docker push $DOCKER_IMAGE:latest'
+                sh '/opt/homebrew/bin/docker push $DOCKER_IMAGE:latest'
             }
         }
 
