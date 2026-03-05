@@ -17,7 +17,7 @@ func readFloat(reader *bufio.Reader) (float64, error) {
 	input = strings.TrimSpace(input)
 	value, err := strconv.ParseFloat(input, 64)
 	if err != nil {
-		return 0, fmt.Errorf("invalid number")
+		return 0, fmt.Errorf("Entered number is invalid.")
 	}
 
 	return value, nil
