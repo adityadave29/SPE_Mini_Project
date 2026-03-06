@@ -5,6 +5,7 @@ import (
 	"math"
 )
 
+// comment
 func validateRangeFloat(number float64) error {
 	if number < 0 || number > 9 {
 		return fmt.Errorf("enter valid number in range (0-9)")
