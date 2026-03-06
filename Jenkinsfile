@@ -63,6 +63,14 @@ pipeline {
             }
         }
 
+        stage('Check Connection with Ansible Hosts') {
+            steps {
+                sh '''
+                ansible -i inventory.ini all -m ping
+                '''
+            }
+        }
+
         stage('Deploy with Ansible') {
             steps {
                 sh '''
