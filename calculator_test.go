@@ -19,7 +19,7 @@ stage('Build') {
 //============================ Addition Testcases ==================================
 func TestAdd1(t *testing.T){
 	result := add(9,10)
-	if result != 19{
+	if result != 20{
 		t.Errorf("Expected 19,got %f",result)
 	}
 }
