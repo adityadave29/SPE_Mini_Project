@@ -40,6 +40,8 @@ func readInt(reader *bufio.Reader) (int, error) {
 }
 
 // cmt
+//comment
+// comment added
 func main() {
 	reader := bufio.NewReader(os.Stdin)
 
