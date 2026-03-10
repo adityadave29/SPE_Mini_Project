@@ -38,7 +38,6 @@ func readInt(reader *bufio.Reader) (int, error) {
 	return value, nil
 }
 
-// comment
 func main() {
 	reader := bufio.NewReader(os.Stdin)
 
