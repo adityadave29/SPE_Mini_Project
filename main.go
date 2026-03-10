@@ -1,4 +1,5 @@
 package main
+
 //  comment
 import (
 	"bufio"
@@ -38,6 +39,7 @@ func readInt(reader *bufio.Reader) (int, error) {
 	return value, nil
 }
 
+// cmt
 func main() {
 	reader := bufio.NewReader(os.Stdin)
 
