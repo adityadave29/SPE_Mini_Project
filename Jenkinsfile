@@ -8,6 +8,10 @@ pipeline {
         PATH = "/usr/bin:/bin:/usr/sbin:/sbin:/opt/homebrew/bin"
     }
 
+    options {
+        skipDefaultCheckout(true)
+    }
+
     stages {
 
         stage('Checkout Source Code') {
